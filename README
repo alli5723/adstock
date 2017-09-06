@@ -1,0 +1,49 @@
+DEVELOPEMENT FLOW
+
+This Application was developed using Node js.
+
+The entry point is server.js file which creates multiple process using cluster library. 
+The server.js has multiple endpoints as listed below;
+/api/buy        -       Intended for the sole purpose of buying stocks
+/api/view       -       For viewing available Stocks (Database Screenshot as mentioned in assignment doc.)
+/api/view/logs  -       For viewing logs (Logs Screenshot as mentioned in assignment doc.)
+/api/update     -       To update Stock database
+
+Each of these endpoints are routed to the stock/ directory with each of the files named appropriately.
+
+The following libraries were used in its development :
+restify - To Create an Http Server which can accept user requests and send out response
+mysql - To Connect to the mysql database and run queries
+es6-promise  - To return a promise using "reject(error)" or "resolve(success)" from called functions
+underscore - To perform Array Manipulations.
+os - To get System processing cores available
+Cluster - To create multiple child processes to acheive the Multi threading documentation (https://nodejs.org/api/cluster.html)
+
+pm2 process manager - This was used on my development system to manage the Application processes.
+
+
+SETUP - RUNNING THIS APPLICATION
+
+To run this Application,
+1.  database has to be created with the queries below, db/connection.js file has to be 
+modified to reflect the database credentials.
+2. npm install
+3. if using pm2, pm2 start server.js --name adcash (You can install pm2 using npm install pm2)
+
+CREATE TABLE `stocks` (
+  `stock_id` int(11) NOT NULL,
+  `company_id` varchar(11) NOT NULL,
+  `countries` text NOT NULL,
+  `budget` varchar(3) NOT NULL,
+  `bid` text NOT NULL,
+  `categories` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `logs` (
+  `log_id` int(11) NOT NULL,
+  `log_content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
